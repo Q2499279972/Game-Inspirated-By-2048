@@ -1,0 +1,76 @@
+<html>
+<script src="engine.js">
+</script>
+<script src="dom-to-image.js">
+</script>
+<head>
+<link href="style.css" rel="stylesheet" type="text/css"/>
+<title>demo</title>
+<style>
+body { overflow-x:hidden; overflow-y:hidden;}
+</style>
+</head>
+
+<script type="text/javascript">
+
+function GetLevelRequest() 
+{
+	var url = location.search;
+	var Request = new Object();
+	if(url.indexOf("?")!=-1)
+	{
+		var str = url.substr(1);
+		strs = str.split("&");
+		for(var i=0;i<strs.length;i++)
+		{
+			Request[decodeURI(strs[i].split("=")[0])]=decodeURI(strs[i].split("=")[1]);
+		}
+	}
+	return Request["level"];
+}
+
+function Init()
+{
+	gGame = new Game(GetLevelRequest()+".xml");
+	document.title = GetLevelRequest();
+	document.onkeydown = function(e)
+	{
+		var currKey=0,e=e||event; currKey=e.keyCode||e.which||e.charCode;
+		if( currKey==37 ) gGame.Move(0); <!-- LEFT -->
+		if( currKey==38 ) gGame.Move(1); <!-- UP -->
+		if( currKey==39 ) gGame.Move(2); <!-- RIGHT -->
+		if( currKey==40 ) gGame.Move(3); <!-- DOWN -->
+		if( ev.keyCode==80 ) screenshot(gGame.mUsedSteps); <!-- DOWN -->
+	}
+}
+
+function screenshot(n)
+{
+    var filename = "screenshot_"+n+".png";
+    domtoimage.toPng(document.getElementById('gameblocks'))
+    .then(function (dataUrl) {
+        var link = document.createElement('a');
+        link.download = filename;
+        link.href = dataUrl;
+        link.click();
+    });
+}
+
+</script>
+<span>Game:</span>
+<body onload="Init()">
+<div id="gamearea">
+	<div id="gameblocks">
+	</div>
+	<span>USED STEPS:&nbsp;&nbsp;</span>
+	<br>
+	<span id="gamesteps">0</span>
+	<br>
+	<span>HISTORY:&nbsp;&nbsp;</span>
+	<br>
+	<span>
+	<textarea id="gamehistory" disabled>Game History</textarea>
+	</span>
+</div>
+
+</html>

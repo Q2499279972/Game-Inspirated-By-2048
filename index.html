@@ -1,0 +1,118 @@
+<html>
+<style>
+#t1{
+	width:100%;
+	height:80;
+	boder:0;
+	bgcolor:"#ffffff" ;
+	align:"left";
+}
+#t1 tbody tr td{ 
+border-bottom:#aaaacc solid 1px; 
+width:100%; 
+background-color:#eeeeee; 
+text-align:left; 
+}
+#t1 thead tr td{ 
+border-bottom:#aaaacc solid 1px; 
+border-top:#aaaacc solid 1px; 
+width:100%; 
+background-color:#cccccc; 
+text-align:left; 
+}
+</style>
+<script type="text/javascript">
+function getCookie(c_name)
+{
+	if (document.cookie.length>0)
+	{ 
+		c_start=document.cookie.indexOf(c_name + "=")
+		if (c_start!=-1)
+		{ 
+			c_start=c_start + c_name.length+1 
+			c_end=document.cookie.indexOf(";",c_start)
+			if (c_end==-1) c_end=document.cookie.length
+				return unescape(document.cookie.substring(c_start,c_end))
+		} 
+	}
+	return ""
+}
+
+function setCookie(c_name,value)
+{
+	document.cookie = c_name + "="+ escape (value) + "; expires=Fri, 31 Dec 9999 23:59:59 GMT";
+
+}
+
+function delAllCookie()
+{    
+	var myDate=new Date();    
+	myDate.setTime(-1000);//设置时间    
+	var data=document.cookie;    
+	var dataArray=data.split(";");    
+	for(var i=0;i<dataArray.length;i++)
+	{    
+		var varName=dataArray[i].split("=");    
+		document.cookie=varName[0]+"=''; expires="+myDate.toGMTString();    
+	}    
+} 
+
+function checkLevelStatue()
+{
+	VERSION=getCookie('VERSION')
+	if (VERSION=="0.01")
+	{
+	}
+	else 
+	{
+		delAllCookie();
+		setCookie('VERSION',"0.01");
+	}
+}
+</script>
+<head>
+<title>demo</title>
+</head>
+<body onload="checkLevelStatue()">
+
+<div style="width:100%;">
+<table id="t1" cellspacing="0">
+	<thead>
+	<tr><td>Level List:&nbsp;&nbsp;<a href="index.html#help">(see help)</a></td></tr>
+	</thead>
+	<tbody>
+	<tr><td>&nbsp;&nbsp;<a href="load.html?level=trival">trival</a></td></tr>
+	<tr><td>&nbsp;&nbsp;<a href="load.html?level=trival2">trival2</a></td></tr>
+	<tr><td>&nbsp;&nbsp;<a href="load.html?level=level1">Level1</a></td></tr>
+	<tr><td>&nbsp;&nbsp;<a href="load.html?level=level1_similar">Level1 Similar</a></td></tr>
+	<tr><td>&nbsp;&nbsp;<a href="load.html?level=level2">Level2</a></td></tr>
+	
+	<tbody>
+</table>
+<br><br><br>
+<table id="t2" cellspacing="0">
+	<tbody>
+		<h1 id='help'>HELP:</h1>
+		<h2>How to control</h2>
+		<ol>
+		<li>use direction key on keyboard to move</li>
+		<li>press p to capture screenshot</li>
+		</ol>
+		<h2>About rule</h2>
+		<ol>
+		<li>move up,down,left and rignt. </li>
+		<li>rule is almost similar to 2048, but no new blocks will generate.</li>
+		<li>if got the final number, the level is passed</li>
+		<li>black blocks: blocks can never be moved</li>
+		<li>yellow blocks without number: blocks can move but can never be canceled</li>
+		<li>write blocks: this means blank. </li>
+		</ol>
+		<h2>About history</h2>
+		<ol>
+		<li>U means up, D means down, L means left and R means right</li>
+		</ol>
+	<tbody>
+</table>
+</div>
+</body>
+</html>

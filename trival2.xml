@@ -1,0 +1,11 @@
+<gameDescription version = "0.1">
+	<width>6</width>
+	<height>4</height>
+	<map>
+	11#111
+	11  11
+	11##11
+	11# 15
+	</map>
+	<target>6</target>
+</gameDescription>
